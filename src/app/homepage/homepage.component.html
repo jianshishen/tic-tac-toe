@@ -1,0 +1,168 @@
+<div class="grid-container">
+  <mat-toolbar color="primary">
+    Tic Tac Toe
+  </mat-toolbar>
+  <mat-grid-list cols="2" rowHeight="200px">
+    <mat-grid-tile colspan="2" rowspan="1">
+      <mat-card class="dashboard-card">
+        <mat-card-content class="dashboard-card-content">
+          <div *ngIf="!ongoing">
+            <form class="example-form">
+              <mat-form-field class="ordinary-component">
+                <input
+                  matInput
+                  placeholder="Player 1's Name"
+                  name="oneName input"
+                  [(ngModel)]="oneName"
+                />
+              </mat-form-field>
+              <mat-form-field *ngIf="!modeAi" class="ordinary-component">
+                <input
+                  matInput
+                  placeholder="Player 2's Name"
+                  name="twoName input"
+                  [(ngModel)]="twoName"
+                />
+              </mat-form-field>
+              <mat-form-field class="ordinary-component" *ngIf="modeAi">
+                <mat-label>AI's Name</mat-label>
+                <mat-select [(value)]="twoName">
+                  <mat-option value="Lewis">Lewis</mat-option>
+                  <mat-option value="Sebastian">Sebastian</mat-option>
+                  <mat-option value="Valtteri">Valtteri</mat-option>
+                  <mat-option value="Max">Max</mat-option>
+                  <mat-option value="Kimi">Kimi</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-slide-toggle
+                class="ordinary-component"
+                *ngIf="modeAi"
+                [checked]="invincible"
+                (change)="invincible = $event.source.checked"
+              >
+                Invincible AI
+              </mat-slide-toggle>
+            </form>
+          </div>
+          <div>
+            <mat-slide-toggle
+              *ngIf="!ongoing"
+              class="ordinary-component"
+              [checked]="modeAi"
+              (change)="modeAi = $event.source.checked"
+            >
+              AI Mode
+            </mat-slide-toggle>
+            <button
+              *ngIf="!ongoing"
+              mat-raised-button
+              (click)="start()"
+              class="ordinary-component"
+              color="primary"
+            >
+              Start
+            </button>
+            <button
+              *ngIf="ongoing"
+              mat-raised-button
+              (click)="stop()"
+              class="ordinary-component"
+              color="primary"
+            >
+              Stop
+            </button>
+          </div>
+          <h1 *ngIf="ongoing && !modeAi && !won && !draw">
+            {{ oneTurn ? "Now is Player 1's turn" : "Now is Player 2's turn" }}
+          </h1>
+          <h1 *ngIf="ongoing && modeAi && draw">
+            It's a draw!
+          </h1>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <div mat-card-avatar></div>
+          <mat-card-title *ngIf="!won">Player 1</mat-card-title>
+          <mat-card-title *ngIf="won && !twoWon">Player 1 Won!</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <h1 *ngIf="ongoing">
+            {{ oneName }}
+          </h1>
+          <div *ngIf="ongoing">
+            <h1 *ngIf="oneIsX; else oneIsO">
+              You are: X
+            </h1>
+            <ng-template #oneIsO>
+              <h1>
+                You are: O
+              </h1>
+            </ng-template>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="2">
+      <mat-card class="dashboard-card">
+        <mat-card-header *ngIf="!ongoing">
+          <div mat-card-avatar></div>
+          <mat-card-title>Press "Start" Button</mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngIf="ongoing" class="board">
+          <mat-grid-list cols="3" rowHeight="1:1">
+            <div *ngFor="let row of rows">
+              <div
+                *ngFor="let cell of row"
+                [style.cursor]="
+                  won || draw
+                    ? 'not-allowed'
+                    : cell.flag === 0
+                    ? 'pointer'
+                    : 'not-allowed'
+                "
+                [style.color]="cell.flag === 1 ? 'red' : 'black'"
+                (click)="!won && !draw && stateChange(cell)"
+              >
+                <mat-grid-tile class="tile">
+                  <h1>
+                    {{ cell.flag === 0 ? "" : cell.flag === 1 ? "X" : "O" }}
+                  </h1>
+                </mat-grid-tile>
+              </div>
+            </div>
+          </mat-grid-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <div mat-card-avatar></div>
+          <mat-card-title *ngIf="!won">Player 2</mat-card-title>
+          <mat-card-title *ngIf="won && twoWon">Player 2 Won!</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <h1 *ngIf="ongoing">
+            {{ twoName }}
+          </h1>
+          <div *ngIf="ongoing">
+            <h1 *ngIf="oneIsX; else twoIsX">
+              You are: O
+            </h1>
+            <ng-template #twoIsX>
+              <h1>
+                You are: X
+              </h1>
+            </ng-template>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

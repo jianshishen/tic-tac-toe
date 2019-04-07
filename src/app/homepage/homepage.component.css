@@ -1,0 +1,39 @@
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.board {
+  margin: auto;
+  text-align: center;
+  width: 340px;
+  height: 340px;
+}
+
+.tile {
+  border: 10px;
+  background: lightgrey;
+}
+
+.tile-font {
+  font-size: "large";
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+
+.example-form {
+  width: 100%;
+}
+
+.ordinary-component {
+  margin: 10px;
+}
