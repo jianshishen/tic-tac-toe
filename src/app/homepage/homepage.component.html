@@ -4,10 +4,10 @@
   </mat-toolbar>
   <mat-grid-list cols="2" rowHeight="200px">
     <mat-grid-tile colspan="2" rowspan="1">
-      <mat-card class="dashboard-card">
-        <mat-card-content class="dashboard-card-content">
+      <mat-card class="material-card">
+        <mat-card-content class="card-content">
           <div *ngIf="!ongoing">
-            <form class="example-form">
+            <form class="ordinary-form">
               <mat-form-field class="ordinary-component">
                 <input
                   matInput
@@ -83,13 +83,13 @@
     </mat-grid-tile>
 
     <mat-grid-tile colspan="1" rowspan="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="material-card">
         <mat-card-header>
           <div mat-card-avatar></div>
           <mat-card-title *ngIf="!won">Player 1</mat-card-title>
           <mat-card-title *ngIf="won && !twoWon">Player 1 Won!</mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
+        <mat-card-content class="card-content">
           <h1 *ngIf="ongoing">
             {{ oneName }}
           </h1>
@@ -108,7 +108,7 @@
     </mat-grid-tile>
 
     <mat-grid-tile colspan="1" rowspan="2">
-      <mat-card class="dashboard-card">
+      <mat-card class="material-card">
         <mat-card-header *ngIf="!ongoing">
           <div mat-card-avatar></div>
           <mat-card-title>Press "Start" Button</mat-card-title>
@@ -126,7 +126,7 @@
                     : 'not-allowed'
                 "
                 [style.color]="cell.flag === 1 ? 'red' : 'black'"
-                (click)="!won && !draw && stateChange(cell)"
+                (click)="!won && !draw && cell.flag === 0 && stateChange(cell)"
               >
                 <mat-grid-tile class="tile">
                   <h1>
@@ -141,13 +141,13 @@
     </mat-grid-tile>
 
     <mat-grid-tile colspan="1" rowspan="1">
-      <mat-card class="dashboard-card">
+      <mat-card class="material-card">
         <mat-card-header>
           <div mat-card-avatar></div>
           <mat-card-title *ngIf="!won">Player 2</mat-card-title>
           <mat-card-title *ngIf="won && twoWon">Player 2 Won!</mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
+        <mat-card-content class="card-content">
           <h1 *ngIf="ongoing">
             {{ twoName }}
           </h1>

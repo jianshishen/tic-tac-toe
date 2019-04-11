@@ -2,7 +2,7 @@
   margin: 20px;
 }
 
-.dashboard-card {
+.material-card {
   position: absolute;
   top: 15px;
   left: 15px;
@@ -26,11 +26,11 @@
   font-size: "large";
 }
 
-.dashboard-card-content {
+.card-content {
   text-align: center;
 }
 
-.example-form {
+.ordinary-form {
   width: 100%;
 }
 
