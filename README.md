@@ -20,4 +20,5 @@ https://jianshishen.github.io/tic-tac-toe/
    `ng serve`
 
 5. Navigate to `http://localhost:4200/`
+
    Tested on Google Chrome v74.0.3729.169
